@@ -17,8 +17,8 @@ colorization.
 # Getting Started
 
 ```shell
-git clone 
-cd 
+git clone https://github.com/gralliry/Gray2Color.git
+cd Gray2Color
 ```
 
 ```shell
