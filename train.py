@@ -25,6 +25,7 @@ parser.add_argument("-lr", "--learning_rate", type=float, default=0.001, help="l
 parser.add_argument("-e", "--epoch", type=int, default=3000, help="nums of epoch")
 parser.add_argument("-bs", "--batch_size", type=int, default=16, help="batch size")
 parser.add_argument("-d", "--dir", type=str, required=True, help="dir of dataset")
+parser.add_argument("-ld", "--load_model", action="store_true", help="dir of dataset")
 args = parser.parse_args()
 
 lr = args.learning_rate
@@ -39,7 +40,7 @@ def train():
     print("[-] Using:", physical_gpus[0].name)
     tlx.set_device('GPU', id=0)
     g = ResNet()
-    if os.path.exists("./checkpoint/g.npz"):
+    if args.load_model and os.path.exists("./checkpoint/g.npz"):
         g.load_weights("./checkpoint/g.npz", format="npz_dict")
     g.set_train()
     dataset = Dataset(path=imgs_path)

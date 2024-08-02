@@ -30,17 +30,17 @@ class ResNet(Module):
     def __init__(self):
         super(ResNet, self).__init__()
         self.head = Sequential([
-            Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1),
+            Conv2d(in_channels=1, out_channels=64, kernel_size=3, stride=1, padding=1),
             ReLU(),
         ])
         self.body = Sequential([
-            ResdualBlock(in_channels=32, out_channels=32) for _ in range(16)
+            ResdualBlock(in_channels=64, out_channels=64) for _ in range(16)
         ])
 
         self.tail = Sequential([
-            Conv2d(in_channels=32, out_channels=32, kernel_size=3, stride=1, padding=1),
+            Conv2d(in_channels=64, out_channels=64, kernel_size=3, stride=1, padding=1),
             ReLU(),
-            Conv2d(in_channels=32, out_channels=3, kernel_size=3, stride=1, padding=1),
+            Conv2d(in_channels=64, out_channels=3, kernel_size=3, stride=1, padding=1),
             Tanh()
         ])
 
