@@ -55,7 +55,7 @@ def train():
         for step, (gr_patch, cr_patch) in enumerate(dataloader, start=1):
             step_time = time.time()
             loss = trainner(gr_patch, cr_patch)
-            print("Epoch: [{}/{}] Step: [{}/{}] Time: {:.3f}s, MSE: {:.5f} ".format(
+            print("Epoch: [{}/{}] Step: [{}/{}] Time: {:.3f}s, Loss: {:.7f} ".format(
                 epoch, epochs, step, steps, time.time() - step_time, float(loss)
             ))
         scheduler.step()

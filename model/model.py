@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Description:
-from tensorlayerx.nn import (Module, Sequential, Conv2d, BatchNorm2d, ReLU, Tanh)
+from tensorlayerx.nn import (Module, Sequential, Conv2d, BatchNorm2d, ReLU, Sigmoid)
 
 
 class ResdualBlock(Module):
@@ -41,7 +41,7 @@ class ResNet(Module):
             Conv2d(in_channels=64, out_channels=64, kernel_size=3, stride=1, padding=1),
             ReLU(),
             Conv2d(in_channels=64, out_channels=3, kernel_size=3, stride=1, padding=1),
-            Tanh()
+            Sigmoid()
         ])
 
     def forward(self, x):

@@ -14,16 +14,17 @@ class Dataset(tlx.dataflow.Dataset):
             RandomCrop(size=(128, 128)),
             FlipVertical(),
             FlipHorizontal(),
-            Normalize(mean=(127.5, 127.5, 127.5), std=(127.5, 127.5, 127.5))
+            Normalize(mean=(0.0, 0.0, 0.0), std=(255.0, 255.0, 255.0))
         ])
+        self.weights = np.array([0.299, 0.587, 0.114], dtype=np.float32).reshape([1, 1, 3])
 
     def __getitem__(self, index):
         color_img = self.color_imgs[index]
         color_img = self.color_tran(color_img)
 
-        gray_img = 0.299 * color_img[..., 0] + 0.587 * color_img[..., 1] + 0.114 * color_img[..., 2]
+        gray_img = np.sum(color_img * self.weights, axis=-1, keepdims=True)
 
-        return gray_img[..., np.newaxis], color_img
+        return gray_img, color_img
 
     def __len__(self):
         return len(self.color_imgs)

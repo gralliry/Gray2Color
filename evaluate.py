@@ -37,9 +37,9 @@ def evaluate():
     model = ResNet()
     model.set_eval()
     model.load_weights("./checkpoint/g.npz", format="npz_dict")
-    color_img = model(gray_image[np.newaxis, ..., np.newaxis] / 127.5 - 1)
+    color_img = model(gray_image[np.newaxis, ..., np.newaxis] / 255.0)
     color_img = tlx.ops.convert_to_numpy(color_img[0])
-    out_color_img = ((color_img + 1) * 127.5).astype(np.uint8)
+    out_color_img = (color_img * 255.0).astype(np.uint8)
     Image.fromarray(out_color_img, mode='RGB').save("./samples/color_img.png")
 
 
